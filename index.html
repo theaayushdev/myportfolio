@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Ayush Dev — Computer Science student portfolio and projects." />
-    <title>Ayush Dev — Portfolio</title>
+    <title>Dev</title>
     <meta name="theme-color" content="#2563eb" />
     <meta property="og:title" content="Ayush Dev — Portfolio" />
     <meta property="og:description" content="Hi, I’m Aayush, a Computer Science student passionate about building clean, fast, and useful software." />
@@ -107,7 +107,11 @@
       }
 
       .section {
-        padding: 3rem 0;
+        padding: 2rem 0;
+      }
+
+      .section:nth-of-type(2) {
+        padding: 0.5rem 0;
       }
 
       /* Header */
@@ -146,7 +150,10 @@
       .header-social a { 
         color: var(--text-secondary); 
         transition: var(--transition); 
-        font-size: 1.1rem; 
+        font-size: 1.1rem;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
       }
       
       .header-social a:hover { 
@@ -941,9 +948,18 @@
             <i class="fas fa-circle-half-stroke"></i>
           </button>
           <div class="header-social">
-            <a id="headerGithubLink" href="https://github.com/theaayushdev" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
-            <a id="headerLinkedinLink" href="https://www.linkedin.com/in/ayush-dev-5a1488253/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-            <a id="headerXLink" href="#" target="_blank" rel="noopener" aria-label="X (Twitter)"><i class="fab fa-x-twitter"></i></a>
+<a id="headerGithubLink" href="https://github.com/theaayushdev" target="_blank" rel="noopener" aria-label="GitHub">
+    <i class="fab fa-github"></i>
+</a>
+
+<a id="headerLinkedinLink" href="https://www.linkedin.com/in/ayush-dev-5a1488253/" target="_blank" rel="noopener" aria-label="LinkedIn">
+    <i class="fab fa-linkedin"></i>
+</a>
+
+<a id="headerXLink" href="https://x.com/theaayushdev" target="_blank" rel="noopener" aria-label="X (Twitter)">
+    <i class="fab fa-twitter"></i>
+</a>
+
           </div>
         </div>
         <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation">
@@ -980,12 +996,6 @@
               <a class="btn secondary" href="#contact">
                 <i class="fas fa-paper-plane"></i> Contact Me
               </a>
-            </div>
-            <div class="social-icons">
-              <a id="heroGithubLink" href="https://github.com/theaayushdev" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
-              <a id="heroLinkedinLink" href="https://www.linkedin.com/in/ayush-dev-5a1488253/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-              <a id="heroLinkedinLink" href="https://www.linkedin.com/in/ayush-dev-5a1488253/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-              <a id="heroXLink" href="#" target="_blank" rel="noopener" aria-label="X (Twitter)"><i class="fab fa-x-twitter"></i></a>
             </div>
           </div>
         </div>
@@ -1087,7 +1097,7 @@
               <i class="fab fa-linkedin"></i> LinkedIn
             </a>
               <a class="btn" href="https://x.com/theaayushdev" target="_blank" rel="noopener">
-              <i class="fab fa-x-twitter"></i> X
+              <i class="fab fa-twitter"></i> X
             </a>
           </div>
         </div>
@@ -1240,12 +1250,21 @@
       const setHrefOrHide = (id, url) => {
         const el = document.getElementById(id);
         if (!el) return;
-        if (url && url !== '#') { el.href = url; }
+        if (url && url !== '#') { 
+          el.href = url;
+          el.style.display = 'inline-flex';
+        }
         else { el.style.display = 'none'; }
       };
-      setHrefOrHide('headerGithubLink', CONFIG.github.url);
-      setHrefOrHide('headerLinkedinLink', CONFIG.linkedin);
-      setHrefOrHide('headerXLink', CONFIG.x);
+      // Header links already have correct URLs in HTML, just ensure they're visible
+      const headerGithubLink = document.getElementById('headerGithubLink');
+      const headerLinkedinLink = document.getElementById('headerLinkedinLink');
+      const headerXLink = document.getElementById('headerXLink');
+      if (headerGithubLink) headerGithubLink.style.display = 'inline-flex';
+      if (headerLinkedinLink) headerLinkedinLink.style.display = 'inline-flex';
+      if (headerXLink) headerXLink.style.display = 'inline-flex';
+      
+      // Set hero links
       setHrefOrHide('heroGithubLink', CONFIG.github.url);
       setHrefOrHide('heroLinkedinLink', CONFIG.linkedin);
       setHrefOrHide('heroXLink', CONFIG.x);
