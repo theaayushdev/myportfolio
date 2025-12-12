@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>My Blogs</title>
+    <meta name="description" content="Blog posts by Ayush Dev" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --bg: #0a0a0a;
+        --card: #111111;
+        --text: #e5e7eb;
+        --muted: #9ca3af;
+        --accent: #10b981;
+        --border: #1f2937;
+        --radius: 10px;
+        --transition: all 0.2s ease;
+      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+        padding: 1.5rem;
+      }
+      a { color: inherit; text-decoration: none; }
+      .container { max-width: 900px; margin: 0 auto; }
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+      }
+      .logo { font-weight: 700; letter-spacing: 0.4px; }
+      .back-link { color: var(--muted); font-weight: 500; }
+      .back-link:hover { color: var(--text); }
+      h1 { font-size: 2rem; margin-bottom: 0.25rem; }
+      .muted { color: var(--muted); }
+
+      .blog-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        margin-top: 1.5rem;
+      }
+
+      .blog-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 1.15rem 1.25rem;
+        transition: var(--transition);
+      }
+
+      .blog-card:hover {
+        border-color: var(--accent);
+      }
+
+      .blog-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 0.75rem;
+        cursor: pointer;
+      }
+
+      .blog-left {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        flex: 1;
+      }
+
+      .blog-icon {
+        font-size: 1rem;
+        color: var(--accent);
+        margin-top: 0.15rem;
+      }
+
+      .blog-title {
+        font-size: 1.05rem;
+        font-weight: 600;
+        margin: 0;
+      }
+
+      .blog-meta {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .blog-toggle {
+        color: var(--muted);
+        transition: var(--transition);
+      }
+
+      .blog-card.open {
+        border-color: var(--accent);
+      }
+
+      .blog-card.open .blog-toggle {
+        transform: rotate(90deg);
+        color: var(--accent);
+      }
+
+      .blog-body {
+        display: none;
+        margin-top: 0.75rem;
+        color: var(--text);
+        line-height: 1.7;
+      }
+
+      .blog-card.open .blog-body {
+        display: block;
+      }
+
+      @media (max-width: 640px) {
+        body { padding: 1.25rem; }
+        h1 { font-size: 1.75rem; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="logo">My Blogs</div>
+        <a class="back-link" href="index.html#home">← Back to portfolio</a>
+      </header>
+
+      <main>
+        <h1>Blogs</h1>
+        <p class="muted">My thoughts, ideas, and insights about development, design, and more.</p>
+
+        <section class="blog-list" id="blogList">
+          <!-- Blogs loaded from CONFIG -->
+        </section>
+      </main>
+
+      <script>
+        async function loadBlogs() {
+          const blogList = document.getElementById('blogList');
+          if (!blogList) return;
+          blogList.innerHTML = '';
+          let blogs = [];
+          try {
+            const res = await fetch('data/blogs.json');
+            blogs = await res.json();
+          } catch (e) {
+            blogs = [];
+          }
+          blogs.forEach(blog => {
+            const card = document.createElement('article');
+            card.className = 'blog-card';
+            card.innerHTML = `
+              <div class="blog-header">
+                <div class="blog-left">
+                  <i class="fas fa-book blog-icon"></i>
+                  <div>
+                    <div class="blog-title">${blog.title}</div>
+                    ${blog.date ? `<div class="blog-meta">${blog.date}</div>` : ''}
+                  </div>
+                </div>
+                <span class="blog-toggle">›</span>
+              </div>
+              <div class="blog-body">${blog.content ? blog.content.replace(/\\n/g, '<br/>') : ''}</div>
+            `;
+            const toggle = card.querySelector('.blog-header');
+            toggle.addEventListener('click', () => {
+              card.classList.toggle('open');
+            });
+            blogList.appendChild(card);
+          });
+        }
+        loadBlogs();
+      </script>
+    </div>
+  </body>
+</html>
+

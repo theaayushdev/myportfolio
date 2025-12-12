@@ -447,8 +447,9 @@
       .github-grid {
         display: grid;
         grid-template-columns: 1fr;
-        gap: 1rem;
-        margin-top: 1.5rem;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+        justify-items: center;
       }
 
       .github-chart {
@@ -467,7 +468,7 @@
         border-radius: 6px;
         margin: 0 auto;
         display: block;
-        filter: brightness(1.1) saturate(1.2);
+        filter: none;
       }
 
       /* Activities */
@@ -897,6 +898,69 @@
       }
 
       /* Blogs Section */
+      .blogs-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        margin-top: 1.5rem;
+      }
+
+      .blogs-list .blog-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 1.1rem 1.25rem;
+        transition: var(--transition);
+        text-decoration: none;
+        color: var(--text-primary);
+        display: block;
+      }
+
+      .blogs-list .blog-card:hover {
+        border-color: var(--accent-green);
+        transform: translateX(4px);
+        background: rgba(16, 185, 129, 0.03);
+      }
+
+      .blogs-list .blog-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+
+      .blogs-list .blog-left {
+        display: inline-flex;
+        align-items: baseline;
+        gap: 0.75rem;
+        flex: 1;
+      }
+
+      .blogs-list .blog-icon {
+        font-size: 1rem;
+        color: var(--accent-green);
+        flex-shrink: 0;
+        line-height: 1;
+      }
+
+      .blogs-list .blog-title {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        line-height: 1;
+      }
+
+      .blogs-list .blog-meta {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+
+      .blogs-list .blog-excerpt {
+        display: none;
+      }
+
       .blogs-placeholder {
         margin-top: 1.5rem;
       }
@@ -968,6 +1032,7 @@
         <nav class="nav" id="mainNav" aria-label="Primary">
           <a href="#home">Home</a>
           <a href="#proof">Proof</a>
+          <a href="blogs.html">Blogs</a>
           <a href="#contact">Contact</a>
         </nav>
       </div>
@@ -1044,14 +1109,12 @@
       <section class="section" id="blogs">
         <div class="container">
           <h2>Blogs</h2>
-          <p class="muted">Thoughts, stories, and insights from my life in tech.</p>
-          <div class="blogs-placeholder">
-            <div class="blog-card">
-              <div class="blog-icon"></div>
-              <h3>Coming Soon</h3>
-             <p>Stories from my life in tech the ups, the downs, learning, failing, and growing along the way. Just thoughts from my journey .</p>
-
-            </div>
+          <p class="muted">My thoughts, ideas, and insights about development, design, and more</p>
+          <div class="blogs-list" id="blogsList">
+            <!-- Blogs loaded from CONFIG -->
+          </div>
+          <div style="margin-top: 1rem;">
+            <a class="btn secondary" href="blogs.html">View all blogs</a>
           </div>
         </div>
       </section>
@@ -1131,6 +1194,7 @@
         x: 'https://x.com/theaayushdev', 
         cv: { viewUrl: 'Ayush Dev - Resume.pdf', downloadUrl: 'Ayush Dev - Resume.pdf' },
         repos: [], // Optional: ['user/repo1','user/repo2'] to pin specific repos
+        blogs: [], // populated from data/blogs.json
         proof: [],
         skills: [
               { name: 'Python' },
@@ -1233,20 +1297,7 @@
         observer.observe(section);
       });
       
-      // Add hover effect to social icons
-      document.querySelectorAll('.social-icons a').forEach(icon => {
-        icon.addEventListener('mouseenter', (e) => {
-          e.target.style.color = 'var(--primary)';
-          e.target.style.transform = 'translateY(-5px)';
-        });
-        
-        icon.addEventListener('mouseleave', (e) => {
-          e.target.style.color = 'var(--gray)';
-          e.target.style.transform = 'translateY(0)';
-        });
-      });
-
-      // Wire social links from CONFIG (header + hero)
+      // Wire social links from CONFIG (header only)
       const setHrefOrHide = (id, url) => {
         const el = document.getElementById(id);
         if (!el) return;
@@ -1263,11 +1314,6 @@
       if (headerGithubLink) headerGithubLink.style.display = 'inline-flex';
       if (headerLinkedinLink) headerLinkedinLink.style.display = 'inline-flex';
       if (headerXLink) headerXLink.style.display = 'inline-flex';
-      
-      // Set hero links
-      setHrefOrHide('heroGithubLink', CONFIG.github.url);
-      setHrefOrHide('heroLinkedinLink', CONFIG.linkedin);
-      setHrefOrHide('heroXLink', CONFIG.x);
 
       // Dynamic GitHub stats and contributions graph
       const statsImg = document.getElementById('githubStatsImg');
@@ -1277,14 +1323,10 @@
       if (statsImg) statsImg.src = `https://github-readme-stats.vercel.app/api?username=${CONFIG.github.username}&show_icons=true&hide_border=true&bg_color=0a0a0a&title_color=ffffff&text_color=9ca3af&icon_color=10b981`;
       
       if (chartImg) {
-        // Use GitHub-style green contribution graph
-        // Using green color #10b981 (emerald-500) which matches GitHub's green
-        chartImg.src = `https://ghchart.rshah.org/10b981/${CONFIG.github.username}`;
-        chartImg.style.filter = 'brightness(1.1) saturate(1.15)';
+        // Use GitHub-like palette with better fidelity
+        chartImg.src = `https://ghchart.rshah.org/196127/${CONFIG.github.username}`;
         chartImg.onload = async () => {
-          // Fetch contribution stats
           try {
-            // Try to get contribution count from GitHub API
             const eventsResponse = await fetch(`https://api.github.com/users/${CONFIG.github.username}/events/public?per_page=100`);
             if (eventsResponse.ok) {
               const events = await eventsResponse.json();
@@ -1292,10 +1334,8 @@
               if (contributionsText) {
                 contributionsText.textContent = `${contributions}+ contributions in the last year`;
               }
-            } else {
-              if (contributionsText) {
-                contributionsText.textContent = 'Contributions in the last year';
-              }
+            } else if (contributionsText) {
+              contributionsText.textContent = 'Contributions in the last year';
             }
           } catch (e) {
             if (contributionsText) {
@@ -1379,6 +1419,36 @@
       })();
 
       // Experience population
+      // Load blogs (compact list, links to blogs.html)
+      async function loadBlogs() {
+        const list = document.getElementById('blogsList');
+        if (!list) return;
+        list.innerHTML = '';
+        let blogs = [];
+        try {
+          const res = await fetch('data/blogs.json');
+          blogs = await res.json();
+        } catch (e) {
+          blogs = CONFIG.blogs || [];
+        }
+        blogs.forEach(blog => {
+          const link = document.createElement('a');
+          link.className = 'blog-card';
+          link.href = 'blogs.html';
+          link.innerHTML = `
+            <div class="blog-content">
+              <div class="blog-left">
+                <i class="fas fa-book blog-icon"></i>
+                <span class="blog-title">${blog.title}</span>
+              </div>
+              ${blog.date ? `<div class="blog-meta">${blog.date}</div>` : ''}
+            </div>
+          `;
+          list.appendChild(link);
+        });
+      }
+      loadBlogs();
+
       (function loadExperience() {
         const list = document.getElementById('experienceList');
         if (!list || !CONFIG.experience) return;

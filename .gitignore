@@ -1,0 +1,45 @@
+# Resume/CV files (keep private if needed)
+# Uncomment the line below if you don't want to share your resume publicly
+*.pdf
+Ayush Dev - Resume.pdf
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Node modules (if you add any build tools later)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build outputs
+dist/
+build/
+.cache/
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+.tmp/
+
+# Personal notes
+notes.txt
+TODO.txt
+private/
