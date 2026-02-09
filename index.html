@@ -1055,7 +1055,7 @@
               <a class="btn secondary" id="viewCvBtn" href="#">
                 <i class="fas fa-eye"></i> View My CV
               </a>
-              <a class="btn secondary" href="Ayush Dev - Resume.pdf" download>
+              <a class="btn secondary" href="Ayush_Dev.pdf" download>
                 <i class="fas fa-download"></i> Download CV
               </a>
               <a class="btn secondary" href="#contact">
@@ -1094,16 +1094,7 @@
         </div>
       </section>
 
-      <!-- Work Experience
-      <section class="section" id="experience">
-        <div class="container">
-          <h2>Work Experience</h2>
-          <p class="muted">All my professional experiences as a software engineer & student developer.</p>
-          <div class="experience-list" id="experienceList">
-            Experience cards populated from CONFIG.experience
-          </div>
-        </div>
-      </section> 
+  
 
       <!-- Blogs Section -->
       <section class="section" id="blogs">
@@ -1180,7 +1171,7 @@
           <strong>Curriculum Vitae</strong>
           <button class="close-btn" id="cvCloseBtn" aria-label="Close CV">×</button>
         </header>
-        <iframe id="cvFrame" class="cv-frame" src="Ayush Dev - Resume.pdf" title="CV PDF"></iframe>
+        <iframe id="cvFrame" class="cv-frame" src="Ayush_Dev.pdf" title="CV PDF"></iframe>
       </div>
     </div>
 
@@ -1192,7 +1183,7 @@
         github: { username: 'theaayushdev', url: 'https://github.com/theaayushdev' },
         linkedin: 'https://www.linkedin.com/in/ayush-dev-5a1488253/',
         x: 'https://x.com/theaayushdev', 
-        cv: { viewUrl: 'Ayush Dev - Resume.pdf', downloadUrl: 'Ayush Dev - Resume.pdf' },
+        cv: { viewUrl: 'Ayush_Dev.pdf', downloadUrl: 'Ayush_Dev.pdf' },
         repos: [], // Optional: ['user/repo1','user/repo2'] to pin specific repos
         blogs: [], // populated from data/blogs.json
         proof: [],
@@ -1212,27 +1203,12 @@
           {  title: 'Technical Head  CoESS', period: '2024 – Present' },
           { title: 'Core Member AWS Cloud Club nec', period: '2025 - present' }
         ],
-        // experience: [
-        //   {
-        //     company: 'Your Dream Company',
-        //     role: 'Software Engineering Intern',
-        //     period: 'Summer 2025',
-        //     location: 'Remote',
-        //     summary: 'Built, shipped, and iterated on internal tools that saved hours of manual work each week.'
-        //   },
-        //   {
-        //     company: 'Freelance',
-        //     role: 'Full‑Stack Developer',
-        //     period: '2023 – Present',
-        //     location: 'Remote',
-        //     summary: 'Designed and developed fast, minimal web experiences for early‑stage founders and student teams.'
-        //   }
-        // ]
+      
       };
-      // Set current year in footer
+  
       document.getElementById('year').textContent = new Date().getFullYear();
 
-      // Theme toggle with persistence
+   
       const root = document.documentElement;
       const themeToggle = document.getElementById('themeToggle');
       const savedTheme = localStorage.getItem('theme') || 'dark';
