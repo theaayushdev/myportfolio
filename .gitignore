@@ -1,7 +1,7 @@
 # Resume/CV files (keep private if needed)
 # Uncomment the line below if you don't want to share your resume publicly
-*.pdf
-Ayush Dev - Resume.pdf
+# *.pdf
+# Ayush Dev - Resume.pdf
 
 # Environment variables
 .env
