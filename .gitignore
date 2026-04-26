@@ -43,3 +43,9 @@ build/
 notes.txt
 TODO.txt
 private/
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
