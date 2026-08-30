@@ -43,3 +43,7 @@ build/
 notes.txt
 TODO.txt
 private/
+.astro/
+dist/
+node_modules/
+.DS_Store

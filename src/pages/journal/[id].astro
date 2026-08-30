@@ -1,0 +1,40 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { site } from '@/data/site';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('journal', ({ data }) => !data.draft);
+  return posts.map((post) => ({ params: { id: post.id }, props: { post } }));
+}
+
+interface Props {
+  post: CollectionEntry<'journal'>;
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const date = post.data.publishedAt.toLocaleDateString('en-US', {
+  month: 'long',
+  day: 'numeric',
+  year: 'numeric',
+});
+---
+
+<BaseLayout
+  title={`${post.data.title} | ${site.name}`}
+  description={post.data.description}
+  type="article"
+  publishedAt={post.data.publishedAt}
+>
+  <article class="minimal-subpage journal-article">
+    <a class="back-link" href="/journal/">← journal</a>
+    <header class="article-heading">
+      <time datetime={post.data.publishedAt.toISOString()}>{date}</time>
+      <h1>{post.data.title}</h1>
+    </header>
+    <div class="article-body">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>

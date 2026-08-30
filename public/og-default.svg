@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Ayush Dev | Computer Engineering student</title>
+  <desc id="desc">Editorial portfolio social card for Ayush Dev.</desc>
+  <rect width="1200" height="630" fill="#0b0d0c"/>
+  <path d="M0 90h1200M0 540h1200M90 0v630M1110 0v630" stroke="#f2efe7" stroke-opacity=".15"/>
+  <circle cx="970" cy="315" r="205" fill="#c7f45b"/>
+  <circle cx="970" cy="315" r="145" fill="none" stroke="#172000"/>
+  <circle cx="970" cy="315" r="72" fill="none" stroke="#172000"/>
+  <text x="970" y="350" fill="#172000" text-anchor="middle" font-family="Arial, sans-serif" font-size="105" font-weight="700" letter-spacing="-10">AD</text>
+  <text x="90" y="150" fill="#c7f45b" font-family="Arial, sans-serif" font-size="20" font-weight="700" letter-spacing="3">BUILDER · WRITER · COMMUNITY LEAD</text>
+  <text x="90" y="295" fill="#f2efe7" font-family="Arial, sans-serif" font-size="82" font-weight="700" letter-spacing="-5">Ayush Dev</text>
+  <text x="90" y="375" fill="#f2efe7" font-family="Georgia, serif" font-size="50" font-style="italic">Useful software for real people.</text>
+  <text x="90" y="510" fill="#9da198" font-family="Arial, sans-serif" font-size="19" letter-spacing="2">KATHMANDU, NEPAL · THEAAYUSHDEV</text>
+</svg>
