@@ -1,0 +1,21 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'journal'>;
+}
+
+const { post } = Astro.props;
+const date = post.data.publishedAt.toLocaleDateString('en-US', {
+  month: 'short',
+  day: 'numeric',
+  year: 'numeric',
+});
+---
+
+<article class="journal-card">
+  <a href={`/journal/${post.id}/`} aria-label={`Read ${post.data.title}`}>
+    <time datetime={post.data.publishedAt.toISOString()}>{date}</time>
+    <h2>{post.data.title}</h2>
+  </a>
+</article>

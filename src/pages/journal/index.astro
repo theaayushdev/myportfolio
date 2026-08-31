@@ -1,0 +1,25 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import JournalCard from '@/components/JournalCard.astro';
+
+const posts = (await getCollection('journal', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf(),
+);
+---
+
+<BaseLayout
+  title="Journal | Ayush Dev"
+  description="Notes by Ayush Dev on building, learning, people, and life."
+>
+  <article class="minimal-subpage">
+    <a class="back-link" href="/">← home</a>
+    <header class="subpage-heading">
+      <h1>journal</h1>
+    </header>
+
+    <div class="journal-list" aria-label="Journal entries">
+      {posts.map((post) => <JournalCard post={post} />)}
+    </div>
+  </article>
+</BaseLayout>

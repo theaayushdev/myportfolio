@@ -1,0 +1,32 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { projects } from '@/data/projects';
+---
+
+<BaseLayout
+  title="Projects | Ayush Dev"
+  description="Selected projects built by Ayush Dev across mobile, web, data, and machine learning."
+>
+  <article class="minimal-subpage projects-page">
+    <a class="back-link" href="/">← home</a>
+    <header class="subpage-heading">
+      <h1>projects</h1>
+      <p>Things I have explored, built, broken, and learned from.</p>
+    </header>
+
+    <div class="project-list">
+      {projects.map((project) => (
+        <article class="project-item">
+          <div class="project-title-row">
+            <h2><a href={project.source} target="_blank" rel="noreferrer">{project.name} ↗</a></h2>
+            {project.live && <a class="project-live" href={project.live} target="_blank" rel="noreferrer">see live ↗</a>}
+          </div>
+          <p>{project.description}</p>
+          <ul class="project-stack" aria-label={`${project.name} technology stack`}>
+            {project.stack.map((technology) => <li>{technology}</li>)}
+          </ul>
+        </article>
+      ))}
+    </div>
+  </article>
+</BaseLayout>
