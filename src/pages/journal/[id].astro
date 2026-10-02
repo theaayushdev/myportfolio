@@ -1,7 +1,6 @@
 ---
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import { site } from '@/data/site';
 
 export async function getStaticPaths() {
   const posts = await getCollection('journal', ({ data }) => !data.draft);
@@ -22,7 +21,7 @@ const date = post.data.publishedAt.toLocaleDateString('en-US', {
 ---
 
 <BaseLayout
-  title={`${post.data.title} | ${site.name}`}
+  title={`${post.data.title} | Dev`}
   description={post.data.description}
   type="article"
   publishedAt={post.data.publishedAt}

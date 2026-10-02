@@ -1,7 +1,7 @@
 export const site = {
   name: 'Ayush Dev',
   shortName: 'AD',
-  title: 'Ayush Dev | Computer Engineering student',
+  title: 'Dev',
   description:
     'Ayush Dev is a Computer Engineering student from Nepal who keeps exploring, building, playing, and learning.',
   email: 'theaayushdev07@gmail.com',
