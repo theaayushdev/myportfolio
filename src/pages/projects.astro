@@ -1,11 +1,13 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { projects } from '@/data/projects';
+
+const pad = (n: number) => String(n).padStart(2, '0');
 ---
 
 <BaseLayout
   title="Projects | Dev"
-  description="Selected projects built by Ayush Dev across mobile, web, data, and machine learning."
+  description="Selected projects and research by Ayush Dev across mobile, web, data, and machine learning."
 >
   <article class="minimal-subpage projects-page">
     <a class="back-link" href="/">← home</a>
@@ -15,18 +17,59 @@ import { projects } from '@/data/projects';
     </header>
 
     <div class="project-list">
-      {projects.map((project) => (
-        <article class="project-item">
-          <div class="project-title-row">
-            <h2><a href={project.source} target="_blank" rel="noreferrer">{project.name} ↗</a></h2>
-            {project.live && <a class="project-live" href={project.live} target="_blank" rel="noreferrer">see live ↗</a>}
-          </div>
-          <p>{project.description}</p>
-          <ul class="project-stack" aria-label={`${project.name} technology stack`}>
-            {project.stack.map((technology) => <li>{technology}</li>)}
-          </ul>
-        </article>
-      ))}
+      {projects.map((project, i) => {
+        const href = project.source;
+        const Tag = href ? 'a' : 'div';
+        return (
+          <Tag
+            class:list={['project-item', { 'is-featured': project.featured }]}
+            style={`--i:${i}`}
+            {...(href ? { href, target: '_blank', rel: 'noreferrer' } : {})}
+          >
+            <div class="project-meta">
+              <span class="project-index">{pad(i + 1)}</span>
+              <span class="project-kind">{project.kind}</span>
+            </div>
+            <h2>
+              {project.name}
+              {href && <span class="project-arrow" aria-hidden="true">↗</span>}
+            </h2>
+            <p>{project.description}</p>
+            <div class="project-foot">
+              <ul class="project-stack" aria-label={`${project.name} technology stack`}>
+                {project.stack.map((technology) => <li>{technology}</li>)}
+              </ul>
+              {project.live && (
+                <span
+                  class="project-live"
+                  role="link"
+                  tabindex="0"
+                  data-href={project.live}
+                >see live ↗</span>
+              )}
+            </div>
+          </Tag>
+        );
+      })}
     </div>
   </article>
 </BaseLayout>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.project-item').forEach((card) => {
+    card.addEventListener('pointermove', (e) => {
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', `${e.clientX - r.left}px`);
+      card.style.setProperty('--my', `${e.clientY - r.top}px`);
+    });
+  });
+  document.querySelectorAll<HTMLElement>('.project-live').forEach((el) => {
+    const open = (e: Event) => {
+      e.preventDefault();
+      e.stopPropagation();
+      window.open(el.dataset.href, '_blank', 'noopener');
+    };
+    el.addEventListener('click', open);
+    el.addEventListener('keydown', (e) => (e.key === 'Enter' ? open(e) : null));
+  });
+</script>
