@@ -4,6 +4,7 @@ export type Project = {
   description: string;
   source?: string;
   live?: string;
+  liveLabel?: string;
   stack: string[];
   featured?: boolean;
 };
@@ -97,6 +98,7 @@ export const projects: Project[] = [
       'The front-desk software for a small hotel. Welcome guests, hand out rooms, and send the bill, without the paperwork.',
     source: 'https://github.com/theaayushdev/Hotel-System',
     live: 'https://www.youtube.com/watch?v=WJWjYPW1qIc',
+    liveLabel: 'watch demo',
     stack: ['Java', 'Swing', 'MySQL'],
   },
 ];

@@ -21,12 +21,12 @@ const date = post.data.publishedAt.toLocaleDateString('en-US', {
 ---
 
 <BaseLayout
-  title={`${post.data.title} | Dev`}
+  title={`${post.data.title} | Ayush Dev`}
   description={post.data.description}
   type="article"
   publishedAt={post.data.publishedAt}
 >
-  <article class="minimal-subpage journal-article">
+  <article class="journal-article">
     <a class="back-link" href="/journal/">← journal</a>
     <header class="article-heading">
       <time datetime={post.data.publishedAt.toISOString()}>{date}</time>

@@ -9,17 +9,15 @@ const posts = (await getCollection('journal', ({ data }) => !data.draft)).sort(
 ---
 
 <BaseLayout
-  title="Journal | Dev"
+  title="Journal | Ayush Dev"
   description="Notes by Ayush Dev on building, learning, people, and life."
 >
-  <article class="minimal-subpage">
+  <article>
     <a class="back-link" href="/">← home</a>
-    <header class="subpage-heading">
-      <h1>journal</h1>
-    </header>
+    <h1>journal</h1>
 
-    <div class="journal-list" aria-label="Journal entries">
+    <ul class="journal-list" aria-label="Journal entries">
       {posts.map((post) => <JournalCard post={post} />)}
-    </div>
+    </ul>
   </article>
 </BaseLayout>
